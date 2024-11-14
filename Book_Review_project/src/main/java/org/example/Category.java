@@ -1,7 +1,7 @@
 package org.example;
 import java.util.ArrayList;
 
-public class Category implements Displayable {
+public abstract class Category implements Displayable {
     private String name;
     private ArrayList<Book> books;
 
@@ -14,12 +14,6 @@ public class Category implements Displayable {
         books.add(book);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Category: " + name);
-        for (Book book : books) {
-            book.display();
-        }
-    }
+
 }
 

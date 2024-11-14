@@ -15,10 +15,6 @@ public abstract class User implements Savable, Comparable<User> {
         this.reviews = new ArrayList<>();
     }
 
-    public void addRating(Book book, int rating) {
-        book.setRating(rating);
-        booksRead.add(book);
-    }
 
     public ArrayList<Book> getBooksRead() {
         return booksRead;

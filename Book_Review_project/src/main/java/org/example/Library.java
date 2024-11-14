@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 public class Library implements Savable, Displayable {
     private ArrayList<Book> books;
     private ArrayList<User> users; // Added users list for sorting
+    private Double averageRating;
 
     public Library() {
         this.books = new ArrayList<>();
@@ -25,11 +26,9 @@ public class Library implements Savable, Displayable {
                 String author = (String) bookObject.get("author");
                 int review = (Integer) bookObject.get("review");
                 int rating = ((Long) bookObject.get("rating")).intValue();
-                books.add(new Book(title, author, rating) {
-                    @Override
-                    public void display() {
 
-                    }
+                books.add(new Book(title, author, averageRating) {
+
                 });
             }
         } catch (Exception e) {
@@ -54,22 +53,16 @@ public class Library implements Savable, Displayable {
         }
     }
 
-    public void sortBooksByRating() {
-        Collections.sort(books);
-        for (Book book : books) {
-            System.out.println(book);
-        }
-    }
 
-    @Override
-    public void display() {
-        for (Book book : books) {
-            book.display();
-        }
-    }
+
 
     @Override
     public void save() {
         System.out.println("Saving library data...");
+    }
+
+    @Override
+    public void display() {
+
     }
 }
