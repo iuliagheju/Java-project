@@ -1,16 +1,22 @@
 package org.example;
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 
 public abstract class User implements Savable, Comparable<User> {
     private String username;
+
     private ArrayList<Book> booksRead; // List of books the user has read
     private ArrayList<ArrayList<Review>> reviews; // List of reviews for each book
+    private List<Book> readingList = new ArrayList<>();
 
     public User(String username) {
-        this.username = username;
+        this.username = username.trim();
+
         this.booksRead = new ArrayList<>();
         this.reviews = new ArrayList<>();
     }
@@ -19,7 +25,10 @@ public abstract class User implements Savable, Comparable<User> {
     public ArrayList<Book> getBooksRead() {
         return booksRead;
     }
+    public List<Book> getReadingList() {
+               return readingList;
 
+    }
     public Collection<Review> getReviews() {
         ArrayList<Review> allReviews = new ArrayList<>();
         for (ArrayList<Review> bookReviews : reviews) {
@@ -28,26 +37,7 @@ public abstract class User implements Savable, Comparable<User> {
         return allReviews;
     }
 
-    public void addReview(int index, Review newReview) {
-        // Ensure index is within bounds
-        if (index >= 0 && index < booksRead.size()) {
-            // If this book doesn't have any reviews yet, initialize a new list for it
-            while (reviews.size() <= index) {
-                reviews.add(new ArrayList<>());
-            }
-            reviews.get(index).add(newReview);
-        } else {
-            System.out.println("Invalid index. No such book in the user's reading list.");
-        }
-    }
 
-    // Returns a specific book by index in the booksRead list
-    public Book getBook(int index) {
-        if (index >= 0 && index < booksRead.size()) {
-            return booksRead.get(index);
-        }
-        return null;
-    }
 
     public String getUsername() {
         return username;
